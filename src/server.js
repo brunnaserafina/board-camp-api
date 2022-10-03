@@ -16,8 +16,5 @@ server.use(gamesRouters);
 server.use(customersRouters);
 server.use(rentalsRouters);
 
-server.get("/status", (req, res) => {
-  res.send("Ok!");
-});
 
 server.listen(4000, () => console.log("Listening on port 4000"));

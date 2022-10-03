@@ -86,3 +86,24 @@ export async function createRental(req, res) {
     return res.sendStatus(STATUS_CODE.SERVER_ERROR);
   }
 }
+
+export async function deleteRental(req, res) {
+  const { id } = req.params;
+
+  try {
+    const existingRental = (
+      await connection.query("SELECT * FROM rentals WHERE id = $1", [id])
+    ).rows;
+
+    if (existingRental.length === 0) {
+      return res.sendStatus(STATUS_CODE.NOT_FOUND);
+    }
+
+    await connection.query("DELETE FROM rentals WHERE id = $1;", [id]);
+
+    return res.sendStatus(STATUS_CODE.OK);
+  } catch (err) {
+    console.error(err);
+    return res.sendStatus(STATUS_CODE.SERVER_ERROR);
+  }
+}
