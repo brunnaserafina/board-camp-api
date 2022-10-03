@@ -46,14 +46,6 @@ export async function createCustomer(req, res) {
   const { name, phone, cpf, birthday } = req.body;
 
   try {
-    const existingCpf = (
-      await connection.query("SELECT * FROM customers WHERE cpf = $1;", [cpf])
-    ).rows[0];
-
-    if (existingCpf) {
-      return res.sendStatus(STATUS_CODE.CONFLICT);
-    }
-
     await connection.query(
       "INSERT INTO customers (name, phone, cpf, birthday) VALUES ($1, $2, $3, $4);",
       [name, phone, cpf, birthday]
