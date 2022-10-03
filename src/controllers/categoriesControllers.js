@@ -16,6 +16,15 @@ export async function postCategories(req, res) {
   const { name } = req.body;
 
   try {
+    const containName = await connection.query(
+      "SELECT * FROM categories WHERE name=$1;",
+      [name]
+    );
+
+    if (containName.rows.length > 0) {
+      return res.sendStatus(STATUS_CODE.CONFLICT);
+    }
+
     await connection.query("INSERT INTO categories (name) VALUES ($1);", [
       name,
     ]);
