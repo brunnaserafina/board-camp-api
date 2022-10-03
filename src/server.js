@@ -4,6 +4,7 @@ import cors from "cors";
 import categoriesRouters from "./routers/categoriesRouters.js";
 import gamesRouters from "./routers/gamesRouters.js";
 import customersRouters from "./routers/customersRouters.js";
+import rentalsRouters from "./routers/rentalsRouters.js";
 
 const server = express();
 
@@ -13,6 +14,7 @@ server.use(express.json());
 server.use(categoriesRouters);
 server.use(gamesRouters);
 server.use(customersRouters);
+server.use(rentalsRouters);
 
 server.get("/status", (req, res) => {
   res.send("Ok!");
