@@ -24,9 +24,10 @@ export async function validateGame(req, res, next) {
       return res.sendStatus(STATUS_CODE.CONFLICT);
     }
 
-    const existingCategory = await connection.query(
-      "SELECT * FROM categories WHERE id = $1;",
-      [categoryId]
+    const existingCategory = (
+      await connection.query("SELECT * FROM categories WHERE id = $1;", [
+        categoryId,
+      ])
     ).rows[0];
 
     if (!existingCategory) {
