@@ -1,14 +1,16 @@
 import express from "express";
 import cors from "cors";
 
-import router from "./routers/categoriesRouters.js";
+import categoriesRouters from "./routers/categoriesRouters.js";
+import gamesRouters from "./routers/gamesRouters.js";
 
 const server = express();
 
 server.use(cors());
 server.use(express.json());
 
-server.use(router);
+server.use(categoriesRouters);
+server.use(gamesRouters);
 
 server.get("/status", (req, res) => {
   res.send("Ok!");
